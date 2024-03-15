@@ -75,6 +75,7 @@ import { AddedDialogComponent } from './invoice/add-invoice/added-dialog/added-d
 import { AppBlogsComponent } from './blogs/blogs.component';
 import { AppBlogDetailsComponent } from './blogs/details/details.component';
 import { CustomersComponent } from './customers/customers.component';
+import { CustomersFormComponent } from './customers/customers-form/customers-form.component';
 
 
 @NgModule({
@@ -133,6 +134,7 @@ import { CustomersComponent } from './customers/customers.component';
     AppBlogsComponent,
     AppBlogDetailsComponent,
     CustomersComponent,
+    CustomersFormComponent,
   ],
   providers: [DatePipe],
 })

@@ -3,8 +3,8 @@ import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { AppEmployeeDialogContentComponent } from '../employee/employee.component';
 import { AppAddEmployeeComponent } from '../employee/add/add.component';
+import { CustomersFormComponent } from './customers-form/customers-form.component';
 
 
 export interface Employee {
@@ -156,8 +156,9 @@ export class CustomersComponent {
 
   openDialog(action: string, obj: any): void {
     obj.action = action;
-    const dialogRef = this.dialog.open(AppEmployeeDialogContentComponent, {
+    const dialogRef = this.dialog.open(CustomersFormComponent, {
       data: obj,
+      width : '45%'
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result.event === 'Add') {

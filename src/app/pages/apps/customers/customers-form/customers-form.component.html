@@ -1,0 +1,197 @@
+<h2 class="f-w-500 m-b-24" mat-dialog-title><strong>{{action}}</strong></h2>
+<mat-dialog-content
+  *ngIf="action !== 'Delete'; else elseTemplate">
+  <form>
+    <div class="d-flex align-items-center m-b-16">
+      <img
+        class="mat-card-avatar"
+        [src]="local_data.imagePath"
+        class="rounded-circle"
+        width="50"
+      />
+      <button
+        mat-flat-button
+        color="primary"
+        class="m-l-16 input-file-button"
+      >
+        <input type="file" (change)="selectFile($event)" #fileInput />
+      </button>
+    </div>
+    <div class="row">
+      <div class="col-lg-4">
+        <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">First Name</mat-label>
+        <mat-form-field appearance="outline" class="w-100">
+          <input
+            type="text"
+            matInput
+            required
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-lg-4">
+        <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Middle Name</mat-label>
+        <mat-form-field appearance="outline" class="w-100">
+          <input
+            type="text"
+            matInput
+            required
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-lg-4">
+        <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Last Name</mat-label>
+        <mat-form-field appearance="outline" class="w-100">
+          <input
+            type="text"
+            matInput
+            required
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-lg-6">
+        <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">As Per Aadhaar Name</mat-label>
+        <mat-form-field appearance="outline" class="w-100">
+          <input
+            type="text"
+            matInput
+            required
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-lg-6">
+          <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Aadhar Number</mat-label>
+        <mat-form-field appearance="outline" class="w-100">
+          <input
+            type="number"
+            matInput
+            required
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-lg-6">
+          <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Pan Number</mat-label>
+        <mat-form-field appearance="outline" class="w-100">
+          <input
+            type="text"
+            matInput
+            required
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-lg-6">
+          <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Date of Birth</mat-label>
+        <mat-form-field appearance="outline" class="w-100">
+          <input
+            type="date"
+            matInput
+            required
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-lg-6">
+          <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Mobile Number</mat-label>
+        <mat-form-field appearance="outline" class="w-100">
+          <input
+            type="number"
+            matInput
+            required
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-lg-6">
+        <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Email Id</mat-label>
+        <mat-form-field appearance="outline" class="w-100">
+          <input
+            type="number"
+            matInput
+            required
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-lg-6">
+        <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Select Gender</mat-label>
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-select value="ma">
+            <mat-option value="ma">Male</mat-option>
+            <mat-option value="fe">Female</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-lg-6">
+        <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Select Married Status</mat-label>
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-select value="no">
+            <mat-option value="no">No</mat-option>
+            <mat-option value="ye">Yes</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-lg-6">
+        <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Select Passport</mat-label>
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-select value="no">
+            <mat-option value="no">No</mat-option>
+            <mat-option value="ye">Yes</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-lg-6">
+        <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Marriage Certificate Number</mat-label>
+        <mat-form-field appearance="outline" class="w-100">
+          <input
+            type="number"
+            matInput
+            required
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-lg-6">
+        <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Passport Number</mat-label>
+        <mat-form-field appearance="outline" class="w-100">
+          <input
+            type="number"
+            matInput
+            required
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-lg-6">
+        <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Passport Expired Date</mat-label>
+      <mat-form-field appearance="outline" class="w-100">
+        <input
+          type="date"
+          matInput
+          required
+        />
+      </mat-form-field>
+    </div>
+    </div>
+    <button
+      mat-flat-button
+      (click)="doAction()"
+      mat-flat-button
+      color="primary"
+    >
+      {{action}}
+    </button>
+    <button
+      mat-stroked-button
+      color="warn"
+      class="m-l-8"
+      (click)="closeDialog()"
+    >
+      Cancel
+    </button>
+  </form>
+</mat-dialog-content>
+<ng-template #elseTemplate>
+  <div class="p-x-24">
+    <p>Sure to delete <span class="f-w-600">{{local_data.Name}}</span> ?</p>
+  </div>
+  <div mat-dialog-actions class="p-x-24 p-b-24">
+    <button mat-button (click)="doAction()" mat-flat-button color="warn">
+      {{action}}
+    </button>
+    <button mat-button (click)="closeDialog()" class="m-l-8">Cancel</button>
+  </div>
+</ng-template>
