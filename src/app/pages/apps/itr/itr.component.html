@@ -5,7 +5,7 @@
           <mat-form-field appearance="outline" class="w-100 hide-hint">
             <input
               matInput
-              placeholder="Search Customers"
+              placeholder="Search ITR File"
               (keyup)="applyFilter($any($event.target).value)"
             />
             <mat-icon matSuffix>
@@ -15,7 +15,7 @@
         </div>
         <div class="col-lg-4 d-flex align-items-center justify-content-end">
           <button mat-flat-button (click)="openDialog('Add', {})" color="primary">
-            New Customers
+            New File
           </button>
         </div>
       </div>

@@ -1,15 +1,15 @@
 import { DatePipe } from '@angular/common';
-import { Component, Inject, OnInit, Optional } from '@angular/core';
+import { Component, Inject, Optional } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CustomersComponent, Customers } from '../customers.component';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CustomersComponent, Customers } from '../../customers/customers.component';
 
 @Component({
-  selector: 'app-customers-form',
-  templateUrl: './customers-form.component.html',
-  styleUrls: ['./customers-form.component.scss']
+  selector: 'app-new-file',
+  templateUrl: './new-file.component.html',
+  styleUrls: ['./new-file.component.scss']
 })
-export class CustomersFormComponent implements OnInit {
+export class NewFileComponent {
   customersForm: FormGroup
   action: string;
   local_data: any;

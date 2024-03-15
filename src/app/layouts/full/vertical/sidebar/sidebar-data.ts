@@ -19,8 +19,8 @@ export const navItems: NavItem[] = [
   },
   {
     displayName: 'ITR',
-    iconName: 'shopping-cart',
-    route: '/dashboards/dashboard2',
+    iconName: 'file-invoice',
+    route: 'apps/itr',
   },
   {
     displayName: 'Pancard',

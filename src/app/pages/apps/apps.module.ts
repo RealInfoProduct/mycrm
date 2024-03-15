@@ -76,6 +76,8 @@ import { AppBlogsComponent } from './blogs/blogs.component';
 import { AppBlogDetailsComponent } from './blogs/details/details.component';
 import { CustomersComponent } from './customers/customers.component';
 import { CustomersFormComponent } from './customers/customers-form/customers-form.component';
+import { ItrComponent } from './itr/itr.component';
+import { NewFileComponent } from './itr/new-file/new-file.component';
 
 
 @NgModule({
@@ -135,6 +137,8 @@ import { CustomersFormComponent } from './customers/customers-form/customers-for
     AppBlogDetailsComponent,
     CustomersComponent,
     CustomersFormComponent,
+    ItrComponent,
+    NewFileComponent,
   ],
   providers: [DatePipe],
 })

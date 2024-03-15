@@ -2,38 +2,18 @@ import { DatePipe } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { CustomersFormComponent } from './customers-form/customers-form.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
-
-export interface Customers {
-  id: number
-  firstName : string
-  middleName : string
-  lastName : string
-  aadharName : string
-  aadharNumber : number
-  panNumber : string
-  dateOfBirth : Date
-  mobileNumber : number
-  emailId : string
-  isGender : string
-  isMarriedStatus : string
-  isPassport : string
-  marriageCertificateNumber : string
-  passportNumber : string
-  passportExpiredDate : string
-  imagePath :string
-}
+import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { CustomersFormComponent } from '../customers/customers-form/customers-form.component';
+import { Customers } from '../customers/customers.component';
+import { NewFileComponent } from './new-file/new-file.component';
 
 @Component({
-  selector: 'app-customers',
-  templateUrl: './customers.component.html',
-  styleUrls: ['./customers.component.scss']
+  selector: 'app-itr',
+  templateUrl: './itr.component.html',
+  styleUrls: ['./itr.component.scss']
 })
-
-export class CustomersComponent {
+export class ItrComponent {
   @ViewChild(MatTable, { static: true }) table: MatTable<any> = Object.create(null);
   searchText: any;
   displayedColumns: string[] = [
@@ -82,7 +62,7 @@ export class CustomersComponent {
 
   openDialog(action: string, obj: any): void {
     obj.action = action;
-    const dialogRef = this.dialog.open(CustomersFormComponent, {
+    const dialogRef = this.dialog.open(NewFileComponent, {
       data: obj,
       width : '45%'
     });
