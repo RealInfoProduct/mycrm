@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { CustomersFormComponent } from './customers-form/customers-form.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 
 export interface Customers {
@@ -70,7 +71,7 @@ export class CustomersComponent {
   dataSource = new MatTableDataSource(this.customersList);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator = Object.create(null);
 
-  constructor(public dialog: MatDialog, public datePipe: DatePipe ,private _snackBar: MatSnackBar ) { }
+  constructor(public dialog: MatDialog, public datePipe: DatePipe ,private _snackBar: MatSnackBar, private router : Router ) { }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
@@ -81,20 +82,21 @@ export class CustomersComponent {
   }
 
   openDialog(action: string, obj: any): void {
-    obj.action = action;
-    const dialogRef = this.dialog.open(CustomersFormComponent, {
-      data: obj,
-      width : '45%'
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result.event === 'Add') {
-        this.addRowData(result.data);
-      } else if (result.event === 'Update') {
-        this.updateRowData(result.data);
-      } else if (result.event === 'Delete') {
-        this.deleteRowData(result.data);
-      }
-    });
+    // obj.action = action;
+    // const dialogRef = this.dialog.open(CustomersFormComponent, {
+    //   data: obj,
+    //   width : '45%'
+    // });
+    // dialogRef.afterClosed().subscribe((result) => {
+    //   if (result.event === 'Add') {
+    //     this.addRowData(result.data);
+    //   } else if (result.event === 'Update') {
+    //     this.updateRowData(result.data);
+    //   } else if (result.event === 'Delete') {
+    //     this.deleteRowData(result.data);
+    //   }
+    // });
+    this.router.navigate(['apps/customer-form'])
   }
 
   // tslint:disable-next-line - Disables all

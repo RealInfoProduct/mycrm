@@ -1,4 +1,4 @@
-<h2 class="f-w-500 m-b-24" mat-dialog-title><strong>{{action}}</strong></h2>
+<!-- <h2 class="f-w-500 m-b-16" mat-dialog-title><strong>{{action}}</strong></h2>
 <mat-dialog-content
   *ngIf="action !== 'Delete'; else elseTemplate">
   <form [formGroup]="customersForm">
@@ -208,4 +208,317 @@
     </button>
     <button mat-button (click)="closeDialog()" class="m-l-8">Cancel</button>
   </div>
-</ng-template>
+</ng-template> -->
+
+<mat-card class="cardWithShadow theme-card">
+  <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="0ms">
+    <form [formGroup]="customersForm">
+      <!-- Personal Information Start -->
+      <mat-tab label="Personal Information">
+        <mat-card-content>
+          <form [formGroup]="customersForm">
+            <div class="d-flex align-items-center m-b-16">
+              <img class="mat-card-avatar" [src]="imagePath" class="rounded-circle" width="50" />
+              <button mat-flat-button color="primary" class="m-l-16 input-file-button">
+                <input type="file" formControlName="userProFile" (change)="selectFile($event)" #fileInput />
+              </button>
+            </div>
+            <div class="row">
+              <div class="col-lg-6 m-t-8">
+                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">First Name <span class="required">
+                    *</span></mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                  <input formControlName="firstName" type="text" matInput oninput="this.value = this.value.toUpperCase()" />
+                  <mat-error *ngIf="customersForm.get('firstName')?.errors?.['required']">First Name is required</mat-error>
+                  <mat-error *ngIf="customersForm.get('firstName')?.errors?.['invalidAlphabetic']">First Name must contain
+                    only alphabetic characters</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-lg-6 m-t-8">
+                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Middle Name <span class="required">
+                    *</span></mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                  <input type="text" formControlName="middleName" matInput
+                    oninput="this.value = this.value.toUpperCase()" />
+                  <mat-error *ngIf="customersForm.get('middleName')?.errors?.['required']">Middle Name is
+                    required</mat-error>
+                  <mat-error *ngIf="customersForm.get('middleName')?.errors?.['invalidAlphabetic']">Middle Name must contain
+                    only alphabetic characters</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-lg-6 m-t-8">
+                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Last Name <span class="required">
+                    *</span></mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                  <input type="text" formControlName="lastName" matInput oninput="this.value = this.value.toUpperCase()" />
+                  <mat-error *ngIf="customersForm.get('lastName')?.errors?.['required']">Last Name is required</mat-error>
+                  <mat-error *ngIf="customersForm.get('lastName')?.errors?.['invalidAlphabetic']">Last Name must contain
+                    only alphabetic characters</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-lg-6 m-t-8">
+                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Date of Birth <span class="required">
+                    *</span></mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                  <input type="date" formControlName="dateOfBirth" matInput />
+                  <mat-error *ngIf="customersForm.get('dateOfBirth')?.errors?.['required']">Date of Birth is
+                    required</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-lg-6 m-t-8">
+                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Mobile Number <span class="required">
+                    *</span></mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                  <input type="number" formControlName="mobileNumber" matInput />
+                  <mat-error *ngIf="customersForm.get('mobileNumber')?.errors?.['required']">Mobile Number is
+                    required</mat-error>
+                  <mat-error *ngIf="customersForm.get('mobileNumber')?.errors?.['invalidPattern']">Mobile Number must be a
+                    10-digit number</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-lg-6 m-t-8">
+                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Email Id <span class="required">
+                    *</span></mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                  <input type="text" formControlName="emailId" matInput />
+                  <mat-error *ngIf="customersForm.get('emailId')?.errors?.['required']">Email Id is required</mat-error>
+                  <mat-error *ngIf="customersForm.get('emailId')?.errors?.['email']">Please enter a valid email
+                    address</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-lg-6 m-t-8">
+                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Gender</mat-label>
+                <div>
+                  <mat-radio-group formControlName="isGender">
+                    <mat-radio-button class="example-margin" value="male">
+                      Male
+                    </mat-radio-button>
+                    <mat-radio-button class="example-margin" value="female">
+                      Female
+                    </mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div>
+              <div class="col-lg-6 m-t-8">
+                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Married</mat-label>
+                <div>
+                  <mat-radio-group formControlName="isMarriedStatus">
+                    <mat-radio-button class="example-margin" value="no">
+                      No
+                    </mat-radio-button>
+                    <mat-radio-button class="example-margin" value="yes">
+                      Yes
+                    </mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="m-t-12 text-right">
+            <button mat-flat-button color="primary" [disabled]="customersForm.invalid" (click)="submitData()">Save</button>
+            <button mat-flat-button color="warn" class="m-l-8">Cancel</button>
+          </div>
+        </mat-card-content>
+      </mat-tab>
+      <!-- Personal Information End -->
+    
+      <!-- Pancard Form Start -->
+      <mat-tab label="Pan Card">
+        <mat-card-content>   
+          <div class="row">
+            <div class="col-lg-12 text-left b-b-1 p-b-10 m-b-20">
+              <span class="error-text">No record available please generate the link.</span>
+            </div>
+              <div class="col-lg-12 d-flex flex-column align-items-center">
+                <div class="imageText">
+                  <span class="mb-2">Pan Card Image Upload.</span>
+                </div>
+                <div class="image-container">
+                  <img class="aadhar-img" [src]="panCardImagePath" />
+                  <div class="upload-icon" (click)="panCardPic.click()">
+                    <i-tabler name="upload" class="icon-20"></i-tabler>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center m-b-16 m-t-16">
+                  <img class="mat-card-avatar" [src]="panCardImagePath" class="rounded-circle" width="50" />
+                  <button mat-flat-button color="primary" class="m-l-16 input-file-button">
+                    <input type="file" formControlName="panCardUrl" (change)="selectPanCardPic($event)" #panCardPic />
+                  </button>
+                </div>
+              </div>
+          </div>
+    
+          <div class="m-t-12 text-right">
+            <button mat-flat-button color="primary">Generate Link</button>
+            <button mat-raised-button color="accent" class="m-l-8" [disabled]="!customersForm.value.panCardUrl" (click)="submitData()">Upload</button>
+            <button mat-flat-button color="warn" class="m-l-8" (click)="cancel('panCard')">Cancel</button>
+          </div>
+        </mat-card-content>
+      </mat-tab>
+      <!-- Pancard Form Start -->
+    
+      <!-- Aadhar Card Form Start -->
+      <mat-tab label="Aadhar Card">
+        <mat-card-content>
+    
+          <div class="row">
+            <div class="col-lg-12 text-left b-b-1 p-b-10 m-b-20">
+              <span class="error-text">No record available please generate the link.</span>
+            </div>
+            <div class="col-lg-6 d-flex flex-column align-items-center">
+              <div class="imageText">
+                <span class="mb-2">Aadhar Card Font Image Upload.</span>
+              </div>
+              <div class="image-container">
+                <img class="aadhar-img" [src]="aadharFontImagePath" />
+                <div class="upload-icon" (click)="aadharCardFontPic.click()">
+                  <i-tabler name="upload" class="icon-20"></i-tabler>
+                </div>
+              </div>
+              <div class="d-flex align-items-center m-b-16 m-t-16">
+                <img class="mat-card-avatar" [src]="aadharFontImagePath" class="rounded-circle" width="50" />
+                <button mat-flat-button color="primary" class="m-l-16 input-file-button">
+                  <input type="file" formControlName="aadharCardFontUrl" (change)="selectAadharCardFontPic($event)"
+                    #aadharCardFontPic />
+                </button>
+              </div>
+            </div>
+            <div class="col-lg-6 d-flex flex-column align-items-center">
+              <div class="imageText">
+                <span class="mb-2">Aadhar Card Back Image Upload.</span>
+              </div>
+              <div class="image-container">
+                <img class="aadhar-img" [src]="aadharBackImagePath" />
+                <div class="upload-icon" (click)="aadharCardBackPic.click()">
+                  <i-tabler name="upload" class="icon-20"></i-tabler>
+                </div>
+              </div>
+              <div class="d-flex align-items-center m-b-16 m-t-16">
+                <img class="mat-card-avatar" [src]="aadharBackImagePath" class="rounded-circle" width="50" />
+                <button mat-flat-button color="primary" class="m-l-16 input-file-button">
+                  <input type="file" formControlName="aadharCardBackUrl" (change)="selectAadharCardBackPic($event)"
+                    #aadharCardBackPic />
+                </button>
+              </div>
+            </div>
+          </div>
+    
+          <div class="m-t-12 text-right">
+            <button mat-flat-button color="primary">Generate Link</button>
+            <button mat-raised-button color="accent" class="m-l-8"  [disabled]="!customersForm.value.aadharCardFontUrl ||  !customersForm.value.aadharCardBackUrl" (click)="submitData()">Upload</button>
+            <button mat-flat-button color="warn" class="m-l-8" (click)="cancel('aadharCard')">Cancel</button>
+          </div>
+        </mat-card-content>
+      </mat-tab>
+      <!-- Aadhar Card Form Start -->
+    
+      <!-- Driving License Form Start -->
+      <mat-tab label="Driving License">
+        <mat-card-content>
+          <div class="row">
+            <div class="col-lg-12 text-left b-b-1 p-b-10 m-b-20">
+              <span class="error-text">No record available please generate the link.</span>
+            </div>
+              <div class="col-lg-12 d-flex flex-column align-items-center">
+                <div class="imageText">
+                  <span class="mb-2">Driving License Image Upload.</span>
+                </div>
+                <div class="image-container">
+                  <img class="aadhar-img" [src]="drivingLicenseImagePath" />
+                  <div class="upload-icon" (click)="drivingLicense.click()">
+                    <i-tabler name="upload" class="icon-20"></i-tabler>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center m-b-16 m-t-16">
+                  <img class="mat-card-avatar" [src]="drivingLicenseImagePath" class="rounded-circle" width="50" />
+                  <button mat-flat-button color="primary" class="m-l-16 input-file-button">
+                    <input type="file" formControlName="drivingLicenseUrl" (change)="selectDrivingLicensePic($event)"
+                      #drivingLicense />
+                  </button>
+                </div>
+              </div>
+          </div>
+    
+          <div class="m-t-12 text-right">
+            <button mat-flat-button color="primary">Generate Link</button>
+            <button mat-raised-button color="accent" class="m-l-8"  [disabled]="!customersForm.value.drivingLicenseUrl" (click)="submitData()">Upload</button>
+            <button mat-flat-button color="warn" class="m-l-8" (click)="cancel('drivingLicense')">Cancel</button>
+          </div>
+        </mat-card-content>
+      </mat-tab>
+      <!-- Driving License Form Start -->
+    
+      <!-- passport Form Start -->
+      <mat-tab label="Pass Port">
+        <mat-card-content>
+    
+          <div class="row">
+            <div class="col-lg-12 text-left b-b-1 p-b-10 m-b-20">
+              <span class="error-text">No record available please generate the link.</span>
+            </div>
+              <div class="col-lg-12 d-flex flex-column align-items-center">
+                <div class="imageText">
+                  <span class="mb-2">Pass Port Image Upload.</span>
+                </div>
+                <div class="image-container">
+                  <img class="aadhar-img" [src]="passPortImagePath" />
+                  <div class="upload-icon" (click)="passPortPic.click()">
+                    <i-tabler name="upload" class="icon-20"></i-tabler>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center m-b-16 m-t-16">
+                  <img class="mat-card-avatar" [src]="passPortImagePath" class="rounded-circle" width="50" />
+                  <button mat-flat-button color="primary" class="m-l-16 input-file-button">
+                    <input type="file" formControlName="passPortUrl" (change)="selectPassPortPic($event)" #passPortPic />
+                  </button>
+                </div>
+              </div>
+          </div>
+    
+          <div class="m-t-12 text-right">
+            <button mat-flat-button color="primary">Generate Link</button>
+            <button mat-raised-button color="accent" class="m-l-8"  [disabled]="!customersForm.value.passPortUrl" (click)="submitData()">Upload</button>
+            <button mat-flat-button color="warn" class="m-l-8" (click)="cancel('passPort')">Cancel</button>
+          </div>
+        </mat-card-content>
+      </mat-tab>
+      <!-- passport Form End -->
+    
+      <!-- voting Form Start -->
+      <mat-tab label="Voting Card">
+        <mat-card-content>
+    
+          <div class="row">
+            <div class="col-lg-12 text-left b-b-1 p-b-10 m-b-20">
+              <span class="error-text">No record available please generate the link.</span>
+            </div>
+              <div class="col-lg-12 d-flex flex-column align-items-center">
+                <div class="imageText">
+                  <span class="mb-2">Voting Card Image Upload.</span>
+                </div>
+                <div class="image-container">
+                  <img class="aadhar-img" [src]="votingCardImagePath" />
+                  <div class="upload-icon" (click)="votingCardPic.click()">
+                    <i-tabler name="upload" class="icon-20"></i-tabler>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center m-b-16 m-t-16">
+                  <img class="mat-card-avatar" [src]="votingCardImagePath" class="rounded-circle" width="50" />
+                  <button mat-flat-button color="primary" class="m-l-16 input-file-button">
+                    <input type="file" formControlName="votingCardUrl" (change)="selectVotingCardPic($event)" #votingCardPic />
+                  </button>
+                </div>
+              </div>
+          </div>
+    
+          <div class="m-t-12 text-right">
+            <button mat-flat-button color="primary">Generate Link</button>
+            <button mat-raised-button color="accent" class="m-l-8"  [disabled]="!customersForm.value.votingCardUrl" (click)="submitData()">Upload</button>
+            <button mat-flat-button color="warn" class="m-l-8" (click)="cancel('votingCard')">Cancel</button>
+          </div>
+        </mat-card-content>
+      </mat-tab>
+      <!-- voting Form End -->
+    </form>
+  </mat-tab-group>
+</mat-card>

@@ -21,6 +21,7 @@ import { AppBlogsComponent } from './blogs/blogs.component';
 import { AppBlogDetailsComponent } from './blogs/details/details.component';
 import { CustomersComponent } from './customers/customers.component';
 import { ItrComponent } from './itr/itr.component';
+import { CustomersFormComponent } from './customers/customers-form/customers-form.component';
 
 export const AppsRoutes: Routes = [
   {
@@ -202,6 +203,17 @@ export const AppsRoutes: Routes = [
           urls: [
             { title: 'Dashboard', url: '/dashboards/dashboard1' },
             { title: 'Customers' },
+          ],
+        },
+      },
+      {
+        path: 'customer-form',
+        component: CustomersFormComponent,
+        data: {
+          title: 'Customer Form',
+          urls: [
+            { title: 'Customer', url: '/customers/customer-form' },
+            { title: 'Customer Form' },
           ],
         },
       },
