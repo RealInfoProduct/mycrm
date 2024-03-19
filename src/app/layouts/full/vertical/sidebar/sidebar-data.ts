@@ -25,7 +25,7 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Pancard',
     iconName: 'shopping-cart',
-    route: '/dashboards/dashboard2',
+    route: 'apps/pancard',
   },
   {
     navCap: 'Apps',

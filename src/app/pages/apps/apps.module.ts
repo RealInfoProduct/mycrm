@@ -76,7 +76,8 @@ import { AppBlogsComponent } from './blogs/blogs.component';
 import { AppBlogDetailsComponent } from './blogs/details/details.component';
 import { CustomersComponent } from './customers/customers.component';
 import { CustomersFormComponent } from './customers/customers-form/customers-form.component';
-
+import { PancardComponent } from './pancard/pancard.component';
+import { PancardFormComponent } from './pancard/pancard-form/pancard-form.component';
 
 @NgModule({
   imports: [
@@ -135,6 +136,8 @@ import { CustomersFormComponent } from './customers/customers-form/customers-for
     AppBlogDetailsComponent,
     CustomersComponent,
     CustomersFormComponent,
+    PancardComponent,
+    PancardFormComponent,
   ],
   providers: [DatePipe],
 })

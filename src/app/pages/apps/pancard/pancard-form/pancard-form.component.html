@@ -1,0 +1,161 @@
+<h2 class="f-w-500 p-b-20 b-b-1" mat-dialog-title><strong>{{action}}</strong></h2>
+<mat-dialog-content class="p-t-20" *ngIf="action !== 'Delete'; else elseTemplate">
+    <form [formGroup]="pancardForm">
+        <div class="d-flex align-items-center m-b-20">
+            <img class="mat-card-avatar" [src]="local_data.imagePath" class="rounded-circle" width="50" />
+            <button mat-flat-button color="primary" class="m-l-16 input-file-button">
+                <input type="file" (change)="selectFile($event)" #fileInput />
+            </button>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Your First Name</mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input type="text" formControlName="yourFirstName" matInput required />
+                </mat-form-field>
+            </div>
+            <div class="col-lg-4">
+                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Your Middle Name</mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input type="text" formControlName="yourMiddleName" matInput required />
+                </mat-form-field>
+            </div>
+            <div class="col-lg-4">
+                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Your Last Name</mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input type="text" formControlName="yourLastName" matInput required />
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">First Name (Father)</mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input type="text" formControlName="fatherFirstName" matInput required />
+                </mat-form-field>
+            </div>
+            <div class="col-lg-4">
+                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Middle Name (Father)</mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input type="text" formControlName="fatherMiddleName" matInput required />
+                </mat-form-field>
+            </div>
+            <div class="col-lg-4">
+                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Last Name (Father)</mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input type="text" formControlName="fatherLastName" matInput required />
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Address</mat-label>
+                <mat-form-field class="example-full-width w-100">
+                    <mat-label> Enter Address</mat-label>
+                    <textarea formControlName="address" matInput placeholder=""></textarea>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-6">
+                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Pancard Number</mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input type="text" formControlName="pancardNumber" matInput required />
+                </mat-form-field>
+            </div>
+            <div class="col-lg-6">
+                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Pancard Status</mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-select formControlName="isPanCardStatus">
+                        <mat-option value="Pending">Pending</mat-option>
+                        <mat-option value="In-Process">In-Process</mat-option>
+                        <mat-option value="Completed">Completed</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-6">
+                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Date of Birth</mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input type="date" formControlName="dateOfBirth" matInput required />
+                </mat-form-field>
+            </div>
+            <div class="col-lg-6">
+                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Gender</mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-select formControlName="gender" value="no">
+                        <mat-option value="male">Male</mat-option>
+                        <mat-option value="female">Female</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-6">
+                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Application Number</mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input type="number" formControlName="applicationNumber" matInput required />
+                </mat-form-field>
+            </div>
+            <div class="col-lg-6">
+                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Fee</mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input type="number" formControlName="fee" matInput required />
+                </mat-form-field>
+            </div>
+            <div class="col-lg-6">
+                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Fee Status</mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-select formControlName="isFeeStatus" value="no">
+                        <mat-option value="pending">Pending</mat-option>
+                        <mat-option value="receview">Received</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-6">
+                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Email Id</mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input type="email" formControlName="emailId" matInput required />
+                </mat-form-field>
+            </div>
+            <div class="col-lg-6">
+                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Mobile Number</mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input type="number" formControlName="mobileNumber" matInput required />
+                </mat-form-field>
+            </div>
+        </div>
+        <!-- <button mat-flat-button (click)="doAction()" mat-flat-button color="primary" [disabled]="">
+            {{action}}
+        </button>
+        <button mat-stroked-button color="warn" class="m-l-8" (click)="closeDialog()">
+            Cancel
+        </button> -->
+    </form>
+</mat-dialog-content>
+<mat-divider></mat-divider>
+<mat-dialog-actions class="p-24 justify-content-end">
+    <button
+        mat-flat-button
+        (click)="doAction()"
+        mat-flat-button
+        color="primary"
+        [disabled]="!pancardForm.valid"
+      >
+        {{action}}
+      </button>
+      <button
+        mat-stroked-button
+        color="warn"
+        class="m-l-8"
+        (click)="closeDialog()"
+      >
+        Cancel
+      </button>
+  </mat-dialog-actions>
+<ng-template #elseTemplate>
+    <!-- <div class="p-x-24">
+        <p>Sure to delete <span class="f-w-600">{{local_data.Name}}</span> ?</p>
+    </div>
+    <div mat-dialog-actions class="p-x-24 p-b-24">
+        <button mat-button (click)="doAction()" mat-flat-button color="warn">
+            {{action}}
+        </button>
+        <button mat-button (click)="closeDialog()" class="m-l-8">Cancel</button>
+    </div> -->
+</ng-template>
