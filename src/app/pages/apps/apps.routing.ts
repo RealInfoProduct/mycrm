@@ -20,6 +20,7 @@ import { AppEditInvoiceComponent } from './invoice/edit-invoice/edit-invoice.com
 import { AppBlogsComponent } from './blogs/blogs.component';
 import { AppBlogDetailsComponent } from './blogs/details/details.component';
 import { CustomersComponent } from './customers/customers.component';
+import { AadharCardComponent } from './aadhar-card/aadhar-card.component';
 
 export const AppsRoutes: Routes = [
   {
@@ -234,6 +235,17 @@ export const AppsRoutes: Routes = [
           urls: [
             { title: 'Dashboard', url: '/dashboards/dashboard1' },
             { title: 'View Invoice' },
+          ],
+        },
+      },
+      {
+        path: 'aadharcard',
+        component: AadharCardComponent,
+        data: {
+          title: 'AadharCard',
+          urls: [
+            { title: 'Dashboard', url: '/dashboards/dashboard1' },
+            { title: 'AadharCard' },
           ],
         },
       },

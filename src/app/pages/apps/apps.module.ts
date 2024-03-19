@@ -76,6 +76,8 @@ import { AppBlogsComponent } from './blogs/blogs.component';
 import { AppBlogDetailsComponent } from './blogs/details/details.component';
 import { CustomersComponent } from './customers/customers.component';
 import { CustomersFormComponent } from './customers/customers-form/customers-form.component';
+import { AadharCardComponent } from './aadhar-card/aadhar-card.component';
+import { AadharFormComponent } from './aadhar-card/aadhar-form/aadhar-form.component';
 
 
 @NgModule({
@@ -135,6 +137,8 @@ import { CustomersFormComponent } from './customers/customers-form/customers-for
     AppBlogDetailsComponent,
     CustomersComponent,
     CustomersFormComponent,
+    AadharCardComponent,
+    AadharFormComponent,
   ],
   providers: [DatePipe],
 })

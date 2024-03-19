@@ -28,6 +28,11 @@ export const navItems: NavItem[] = [
     route: '/dashboards/dashboard2',
   },
   {
+    displayName: 'Aadharcard',
+    iconName: 'id-badge-2',
+    route: 'apps/aadharcard',
+  },
+  {
     navCap: 'Apps',
   },
   {
