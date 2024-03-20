@@ -10,6 +10,11 @@ export const navItems: NavItem[] = [
     route: '/dashboards/dashboard1',
   },
   {
+    displayName: 'Talk To Customer',
+    iconName: 'checklist',
+    route: 'apps/talktocustomer',
+  },
+  {
     displayName: 'Customers',
     iconName: 'user-circle',
     route: 'apps/customers',

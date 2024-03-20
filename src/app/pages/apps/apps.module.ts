@@ -78,6 +78,8 @@ import { CustomersComponent } from './customers/customers.component';
 import { CustomersFormComponent } from './customers/customers-form/customers-form.component';
 import { ItrComponent } from './itr/itr.component';
 import { NewFileComponent } from './itr/new-file/new-file.component';
+import { TalkToCustomerComponent } from './talk-to-customer/talk-to-customer.component';
+import { TalkToCustomerFormComponent } from './talk-to-customer/talk-to-customer-form/talk-to-customer-form.component';
 
 
 @NgModule({
@@ -139,6 +141,8 @@ import { NewFileComponent } from './itr/new-file/new-file.component';
     CustomersFormComponent,
     ItrComponent,
     NewFileComponent,
+    TalkToCustomerComponent,
+    TalkToCustomerFormComponent,
   ],
   providers: [DatePipe],
 })

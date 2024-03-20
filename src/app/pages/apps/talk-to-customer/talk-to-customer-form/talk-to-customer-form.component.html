@@ -1,0 +1,59 @@
+
+<h2 class="f-w-500 m-b-24" mat-dialog-title><strong>Send Message</strong></h2>
+<mat-dialog-content>
+      <div class="row">
+        <div class="col-lg-12">
+          <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Form</mat-label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input
+              type="text"
+              matInput
+              required
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-lg-12">
+          <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">To</mat-label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input
+              type="text"
+              matInput
+              required
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-lg-6">
+            <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Select Reminder Date</mat-label>
+            <mat-form-field appearance="outline" class="w-100">
+                <input
+                  matInput
+                  [matDatepicker]="startDateDP"
+                  placeholder="Reminder Date"
+                  name="reminderDate"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="startDateDP"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #startDateDP></mat-datepicker>
+              </mat-form-field>
+        </div>
+        <div class="col-lg-6">
+            <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Select Type</mat-label>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-select value="No">
+                <mat-option value="No">No</mat-option>
+                <mat-option value="Yes">Yes</mat-option>
+              </mat-select>
+            </mat-form-field>
+        </div>
+      </div>
+</mat-dialog-content>
+
+<mat-dialog-actions class="justify-content-end">
+    <button mat-flat-button (click)="onNoClick()" mat-flat-button color="primary">Submit
+    </button>
+    <button mat-stroked-button color="warn" class="m-l-8" (click)="onNoClick()">
+        Cancel
+    </button>
+</mat-dialog-actions>
