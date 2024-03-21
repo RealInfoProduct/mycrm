@@ -224,7 +224,18 @@ export const AppsRoutes: Routes = [
         data: {
           title: 'Customer Form',
           urls: [
-            { title: 'Customer', url: '/customers/customer-form' },
+            { title: 'Customer', url: '/apps/customers' },
+            { title: 'Customer Form' },
+          ],
+        },
+      },
+      {
+        path: 'customer-form/:customersId?',
+        component: CustomersFormComponent,
+        data: {
+          title: 'Customer Form',
+          urls: [
+            { title: 'Customer', url: '/apps/customers' },
             { title: 'Customer Form' },
           ],
         },

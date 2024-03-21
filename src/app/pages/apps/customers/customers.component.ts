@@ -1,11 +1,13 @@
 import { DatePipe } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { CustomersFormComponent } from './customers-form/customers-form.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { CustomerService } from 'src/app/shared/services/customer.service';
+import { environment } from 'src/environments/environment.prod';
 
 
 export interface Customers {
@@ -34,16 +36,14 @@ export interface Customers {
   styleUrls: ['./customers.component.scss']
 })
 
-export class CustomersComponent {
+export class CustomersComponent implements OnInit {
   @ViewChild(MatTable, { static: true }) table: MatTable<any> = Object.create(null);
   searchText: any;
   displayedColumns: string[] = [
     '#',
     'firstName',
-    'Email',
+    'email',
     'mobileNumber',
-    'aadharNumber',
-    'panNumber',
     'isGender',
     'action',
   ];
@@ -68,10 +68,15 @@ export class CustomersComponent {
       imagePath: 'assets/images/profile/user-2.jpg',
     }
   ]
-  dataSource = new MatTableDataSource(this.customersList);
+  s3bucketUrl : any =  environment.S3_BUCKE_URL
+  dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator = Object.create(null);
 
-  constructor(public dialog: MatDialog, public datePipe: DatePipe ,private _snackBar: MatSnackBar, private router : Router ) { }
+  constructor(public dialog: MatDialog, public datePipe: DatePipe ,private _snackBar: MatSnackBar, private router : Router , private customerService : CustomerService) { }
+
+  ngOnInit(): void {
+    this.getAllCustomer()
+  }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
@@ -96,7 +101,24 @@ export class CustomersComponent {
     //     this.deleteRowData(result.data);
     //   }
     // });
-    this.router.navigate(['apps/customer-form'])
+
+    if (action === 'Update') {
+      this.router.navigate(['apps/customer-form/' + obj.customer_uuid]);
+    } else {
+      this.router.navigate(['apps/customer-form'])
+    }
+
+  }
+
+  getAllCustomer(){
+    const payload = {
+      action : "get_customer_list"
+    }
+    this.customerService.manageCustomer(payload).subscribe((res:any) => {
+      if (res) {
+        this.dataSource = new MatTableDataSource(res.data.customerData);
+      }
+    })
   }
 
   // tslint:disable-next-line - Disables all
@@ -125,7 +147,7 @@ export class CustomersComponent {
 
     // this.dialog.open(AppAddEmployeeComponent);
     this.openConfigSnackBar('Customer Create Successful !!')
-    this.dataSource = new MatTableDataSource(this.customersList);
+    // this.dataSource = new MatTableDataSource(this.customersList);
     this.table.renderRows();
   }
 
@@ -172,5 +194,18 @@ export class CustomersComponent {
       horizontalPosition: 'right',
       verticalPosition: 'top',
     });
+  }
+
+  customersDelete(customersData: any) {
+    const customersDataPayload = {
+      "action": "delete_customer",
+      "customer_id": customersData.customer_uuid
+    }
+    this.customerService.manageCustomer(customersDataPayload).subscribe((res:any) => {
+      if (res) {
+        this.openConfigSnackBar(res.message)
+        this.getAllCustomer()
+      }
+    })
   }
 }
