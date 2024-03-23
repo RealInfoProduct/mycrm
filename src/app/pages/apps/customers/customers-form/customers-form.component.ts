@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { NULL } from 'sass';
 import { CustomerService } from 'src/app/shared/services/customer.service';
@@ -50,9 +51,15 @@ export class CustomersFormComponent {
   votingCardImagePath:any = '../../../../../assets/images/customers/voting card.jpg';
   passPortImagePath:any = '../../../../../assets/images/customers/passport.webp';
   aadharImagePath:any = '../../../../../assets/images/documentImage/aadhaar-card.png';
+  birthCertificatePath:any = '../../../../../assets/images/documentImage/aadhaar-card.png';
+  schoolLeavingCertificatePath:any = '../../../../../assets/images/customers/school-leaving-certificate.jpg';
+  lightBillPath:any = '../../../../../assets/images/customers/light bill Pic.jpg';
+  casteCertificatePath:any = '../../../../../assets/images/customers/caste-certificate.jpg';
   isEdit :boolean = false
   customerEditData :any
   S3_BUCKE_URL :any = environment.S3_BUCKE_URL
+  pdfUrl: any;
+  isPdfShow : boolean = false
 
   document_URL: any = {
     pancard_file :  null,
@@ -67,16 +74,26 @@ export class CustomersFormComponent {
     passPortUrl_show_URL: '../../../../../assets/images/customers/passport.webp',
     votingCardUrl_file :  null,
     votingCardUrl_show_URL: '../../../../../assets/images/customers/voting card.jpg',
-    userProDileUrl_file :  null,
-    userProDileUrl_show_URL: 'assets/images/profile/user-1.jpg',
+    userProFileUrl_file :  null,
+    userProFileUrl_show_URL: 'assets/images/profile/user-1.jpg',
+    birthCertificateUrl_file :  null,
+    birthCertificateUrl_show_URL: '../../../../../assets/images/customers/birth-certificate.jpg',
+    schoolLeavingCertificateUrl_file :  null,
+    schoolLeavingCertificateUrl_show_URL: '../../../../../assets/images/customers/school-leaving-certificate.jpg',
+    lightBillUrl_file :  null,
+    lightBillUrl_show_URL: '../../../../../assets/images/customers/light bill Pic.jpg',
+    casteCertificateUrl_file :  null,
+    casteCertificateUrl_show_URL: '../../../../../assets/images/customers/caste-certificate.jpg',
   }
+  lightBillUrlArray :any = []
 
   constructor(
     public datePipe: DatePipe,
     private formBuilder : FormBuilder,
     private customerService :CustomerService,
     private _snackBar: MatSnackBar,
-    private route: ActivatedRoute) {}
+    private route: ActivatedRoute,
+    private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {    
     this.customersFormBuilder()
@@ -113,12 +130,26 @@ export class CustomersFormComponent {
   }
 
   displaySelectedFile(event:any ,docType: string, docShowUrl: any) {
-    this.document_URL[docType] = event.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(event.target.files[0]);
-    reader.onload = (_event) => {
-      this.document_URL[docShowUrl] = reader.result;
-    };
+    if(event.target.files[0].type === 'application/pdf') {
+      this.document_URL[docType] = event.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (_event) => {
+        this.document_URL[docShowUrl] = reader.result;
+        const pdfDataUrl = reader.result as string;
+        this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(pdfDataUrl);
+        this.isPdfShow = true
+      };
+    } else {
+      this.document_URL[docType] = event.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (_event) => {
+        this.document_URL[docShowUrl] = reader.result;
+        this.isPdfShow = false
+
+      };
+    }
   }
 
   customersFormBuilder() {
@@ -137,7 +168,11 @@ export class CustomersFormComponent {
       aadharCardBackUrl: [''],
       drivingLicenseUrl: [''],
       passPortUrl: [''],
-      votingCardUrl: ['']
+      votingCardUrl: [''],
+      birthCertificateUrl: [''],
+      schoolLeavingCertificateUrl: [''],
+      lightBillUrl: [''],
+      casteCertificateUrl: [''],
     })
   }
 
@@ -158,17 +193,18 @@ export class CustomersFormComponent {
         aadhar_back_url: this.customersForm.value.aadharCardBackUrl,
         aadhar_front_url: this.customersForm.value.aadharCardFontUrl,
         aadhar_number: "",
-        birth_certificate_url: "",
+        birth_certificate_url: this.customersForm.value.birthCertificateUrl,
         driving_number: "",
         driving_url: this.customersForm.value.drivingLicenseUrl,
-        leaving_certificate_url: "",
-        light_bill_urls: [],
+        leaving_certificate_url: this.customersForm.value.schoolLeavingCertificateUrl,
+        light_bill_urls: [''],
         pancard_number: "",
         pancard_url: this.customersForm.value.panCardUrl,
         passport_expiry_date: "",
         passport_number: "",
         passport_url: this.customersForm.value.passPortUrl,
-        voting_url: this.customersForm.value.votingCardUrl
+        voting_url: this.customersForm.value.votingCardUrl,
+        caste_certificate_url : this.customersForm.value.casteCertificateUrl
       }
 
       this.customerService.manageCustomer(customerRegisterPayload).subscribe((res:any) => {
@@ -212,7 +248,8 @@ export class CustomersFormComponent {
                 passport_expiry_date: "",
                 passport_number: "",
                 passport_url: this.customersForm.value.passPortUrl,
-                voting_url: this.customersForm.value.votingCardUrl
+                voting_url: this.customersForm.value.votingCardUrl,
+                caste_certificate_url : this.customersForm.value.casteCertificateUrl
               }
               this.customerService.createCustomer(customerRegisterPayload).subscribe((res:any) => {
                 if (res) {
@@ -253,6 +290,22 @@ export class CustomersFormComponent {
         this.customersForm.controls['votingCardUrl'].setValue('')
         this.votingCardImagePath = '../../../../../assets/images/customers/voting card.jpg';
         break;
+      case 'birthCertificateCard':
+        this.customersForm.controls['birthCertificateUrl'].setValue('')
+        this.birthCertificatePath = '../../../../../assets/images/customers/voting card.jpg';
+        break;
+      case 'schoolLeavingCertificateCard':
+        this.customersForm.controls['schoolLeavingCertificateUrl'].setValue('')
+        this.schoolLeavingCertificatePath = '../../../../../assets/images/customers/school-leaving-certificate.jpg';
+        break;
+      case 'lightBillUrlPic':
+        this.customersForm.controls['lightBillUrl'].setValue('')
+        this.lightBillPath = '../../../../../assets/images/customers/light bill Pic.jpg';
+        break;
+      case 'casteCertificateCard':
+        this.customersForm.controls['casteCertificateUrl'].setValue('')
+        this.casteCertificatePath = '../../../../../assets/images/customers/caste-certificate.jpg';
+        break;
       default:
     }
   }
@@ -289,6 +342,12 @@ export class CustomersFormComponent {
         this.customersForm.controls['passPortUrl'].setValue(res.data.customerData.documents.passport_url) 
         this.customersForm.controls['votingCardUrl'].setValue(res.data.customerData.documents.voting_url) 
         this.customersForm.controls['userProFile'].setValue(res.data.customerData.user_image_url) 
+        this.customersForm.controls['birthCertificateUrl'].setValue(res.data.customerData.documents.birth_certificate_url) 
+        this.customersForm.controls['schoolLeavingCertificateUrl'].setValue(res.data.customerData.documents.leaving_certificate_url) 
+        this.lightBillUrlArray = []
+        this.lightBillUrlArray = res.data.customerData.documents.light_bill_urls
+        this.customersForm.controls['lightBillUrl'].setValue(res.data.customerData.documents.light_bill_urls[0])       
+        this.customersForm.controls['casteCertificateUrl'].setValue(res.data.customerData.documents.caste_certificate_url) 
 
        } 
     })
@@ -320,17 +379,18 @@ export class CustomersFormComponent {
       aadhar_back_url: this.customersForm.value.aadharCardBackUrl,
       aadhar_front_url: this.customersForm.value.aadharCardFontUrl,
       aadhar_number: "",
-      birth_certificate_url: "",
+      birth_certificate_url: this.customersForm.value.birthCertificateUrl,
       driving_number: "",
       driving_url: this.customersForm.value.drivingLicenseUrl,
-      leaving_certificate_url: "",
+      leaving_certificate_url: this.customersForm.value.schoolLeavingCertificateUrl,
       light_bill_urls: [],
       pancard_number: "",
       pancard_url: this.customersForm.value.panCardUrl,
       passport_expiry_date: "",
       passport_number: "",
       passport_url: this.customersForm.value.passPortUrl,
-      voting_url: this.customersForm.value.votingCardUrl
+      voting_url: this.customersForm.value.votingCardUrl,
+      caste_certificate_url : this.customersForm.value.casteCertificateUrl
     }
     this.customerService.createGeneralImageUpload(signedURLPaylod).subscribe((signedURLRes: any) => {
       if (signedURLRes) {
@@ -355,13 +415,24 @@ export class CustomersFormComponent {
               case 'votingCardUrl':
                 customerRegisterPayload.voting_url = signedURLRes.Key
                 break;
-
+              case 'birthCertificateUrl':
+                customerRegisterPayload.birth_certificate_url = signedURLRes.Key
+                break;
+              case 'schoolLeavingCertificateUrl':
+                customerRegisterPayload.leaving_certificate_url = signedURLRes.Key
+                break;
+              case 'lightBillUrl':
+                this.lightBillUrlArray.push(signedURLRes.Key)
+                customerRegisterPayload.light_bill_urls = this.lightBillUrlArray
+                break;
+                case 'casteCertificateUrl':
+                  customerRegisterPayload.caste_certificate_url = signedURLRes.Key
+                  break;
               default:
                 break;
             }
             this.customerService.manageCustomer(customerRegisterPayload).subscribe((res: any) => {
               if (res) {
-                this.document_URL.pancard_file = null
                 this.openConfigSnackBar(res.message)
               }
             })
@@ -380,10 +451,8 @@ export class CustomersFormComponent {
 
   }
 
-
   aadharCardFontAndBackImageUpload(){
     this.uploaddocuments('aadharcardfont','aadharCardFont_file')
     this.uploaddocuments('aadharcardback','aadharCardBack_file')
   }
-
 }

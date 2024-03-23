@@ -6,7 +6,7 @@
         <mat-card-content>
           <form [formGroup]="customersForm">
             <div class="d-flex align-items-center m-b-16">
-              <img class="mat-card-avatar" [src]="getDocumentUrl('userProDileUrl_file','userProDileUrl_show_URL','userProFile')" class="rounded-circle" width="50" />
+              <img class="mat-card-avatar" [src]="getDocumentUrl('userProFileUrl_file','userProFileUrl_show_URL','userProFile')" class="rounded-circle" width="50" />
               <button mat-flat-button color="primary" class="m-l-16 input-file-button" *ngIf="!isEdit">
                 <input type="file" (change)="selectUserProFile($event)" #fileInput />
               </button>
@@ -289,6 +289,144 @@
         </mat-card-content>
       </mat-tab>
       <!-- voting Form End -->
+          
+      <!-- birth certificate Form Start -->
+      <mat-tab label="Birth Certificate">
+        <mat-card-content>
+    
+          <div class="row">
+            <div class="col-lg-12 text-right b-b-1 p-b-10 m-b-20" *ngIf="!customersForm.value.birthCertificateUrl">
+              <span class="error-text">No record available please generate the link.</span>
+            </div>
+              <div class="col-lg-12 d-flex flex-column align-items-center">
+                <div class="image-container">
+                  <img class="aadhar-img" [src]="getDocumentUrl('birthCertificateUrl_file' , 'birthCertificateUrl_show_URL' , 'birthCertificateUrl')" />
+                  <div class="upload-icon" (click)="birthCertificateCardPic.click()">
+                    <i-tabler name="upload" class="icon-20"></i-tabler>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center m-b-16 m-t-16">
+                  <img class="mat-card-avatar" [src]="getDocumentUrl('birthCertificateUrl_file' , 'birthCertificateUrl_show_URL' , 'birthCertificateUrl')" class="rounded-circle" width="50" />
+                  <button mat-flat-button color="primary" class="m-l-16 input-file-button">
+                    <input type="file" (change)="displaySelectedFile($event, 'birthCertificateUrl_file', 'birthCertificateUrl_show_URL')" #birthCertificateCardPic />
+                  </button>
+                </div>
+              </div>
+          </div>
+    
+          <div class="m-t-12 text-right">
+            <button mat-flat-button color="primary">Generate Link</button>
+            <button mat-raised-button color="accent" class="m-l-8"  (click)="uploaddocuments('birthCertificateUrl','birthCertificateUrl_file')">Upload</button>
+            <button mat-flat-button color="warn" class="m-l-8" (click)="cancel('birthCertificateCard')">Cancel</button>
+          </div>
+        </mat-card-content>
+      </mat-tab>
+      <!-- birth certificate Form End -->
+          
+      <!-- school leaving certificate Form Start -->
+      <mat-tab label="Leaving Certificate">
+        <mat-card-content>
+    
+          <div class="row">
+            <div class="col-lg-12 text-right b-b-1 p-b-10 m-b-20" *ngIf="!customersForm.value.schoolLeavingCertificateUrl">
+              <span class="error-text">No record available please generate the link.</span>
+            </div>
+              <div class="col-lg-12 d-flex flex-column align-items-center">
+                <div class="image-container">
+                  <img class="aadhar-img" [src]="getDocumentUrl('schoolLeavingCertificateUrl_file' , 'schoolLeavingCertificateUrl_show_URL' , 'schoolLeavingCertificateUrl')" />
+                  <div class="upload-icon" (click)="schoolLeavingCertificatePic.click()">
+                    <i-tabler name="upload" class="icon-20"></i-tabler>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center m-b-16 m-t-16">
+                  <img class="mat-card-avatar" [src]="getDocumentUrl('schoolLeavingCertificateUrl_file' , 'schoolLeavingCertificateUrl_show_URL' , 'schoolLeavingCertificateUrl')" class="rounded-circle" width="50" />
+                  <button mat-flat-button color="primary" class="m-l-16 input-file-button">
+                    <input type="file" (change)="displaySelectedFile($event, 'schoolLeavingCertificateUrl_file', 'schoolLeavingCertificateUrl_show_URL')" #schoolLeavingCertificatePic />
+                  </button>
+                </div>
+              </div>
+          </div>
+    
+          <div class="m-t-12 text-right">
+            <button mat-flat-button color="primary">Generate Link</button>
+            <button mat-raised-button color="accent" class="m-l-8"  (click)="uploaddocuments('schoolLeavingCertificateUrl','schoolLeavingCertificateUrl_file')">Upload</button>
+            <button mat-flat-button color="warn" class="m-l-8" (click)="cancel('schoolLeavingCertificateCard')">Cancel</button>
+          </div>
+        </mat-card-content>
+      </mat-tab>
+      <!-- school leaving certificate Form End -->
+          
+      <!-- Light Bill Form Start -->
+      <mat-tab label="Light Bill">
+        <mat-card-content>
+    
+              <div class="row">
+                <div class="col-lg-12 text-right b-b-1 p-b-10 m-b-20" *ngIf="!customersForm.value.lightBillUrl">
+                  <span class="error-text">No record available please generate the link.</span>
+                </div>
+                  <div class="col-lg-12 d-flex flex-column align-items-center">
+                    <div  *ngIf="!isPdfShow">
+                      <div class="image-container">
+                        <img class="aadhar-img" [src]="getDocumentUrl('lightBillUrl_file' , 'lightBillUrl_show_URL' , 'lightBillUrl')" />
+                        <div class="upload-icon" (click)="lightBillUrlPic.click()">
+                          <i-tabler name="upload" class="icon-20"></i-tabler>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="d-flex align-items-center m-b-16 m-t-16">
+                      <img  *ngIf="!isPdfShow" class="mat-card-avatar" [src]="getDocumentUrl('lightBillUrl_file' , 'lightBillUrl_show_URL' , 'lightBillUrl')" class="rounded-circle" width="50" />
+                      <button mat-flat-button color="primary" class="m-l-16 input-file-button">
+                        <input type="file" (change)="displaySelectedFile($event, 'lightBillUrl_file', 'lightBillUrl_show_URL')" #lightBillUrlPic />
+                      </button>
+                    </div>
+                    <div style="width: 100%;"  *ngIf="isPdfShow">
+                      <embed [src]="pdfUrl" type="application/pdf" class="pdf-viewer" />
+                    </div>
+                  </div>
+              </div>
+        
+              <div class="m-t-12 text-right">
+                <button mat-flat-button color="primary">Generate Link</button>
+                <button mat-raised-button color="accent" class="m-l-8"  (click)="uploaddocuments('lightBillUrl','lightBillUrl_file')">Upload</button>
+                <button mat-flat-button color="warn" class="m-l-8" (click)="cancel('lightBillUrlPic')">Cancel</button>
+              </div>
+        </mat-card-content>     
+      </mat-tab>
+      <!-- Light Bill Form End -->
+                
+      <!-- caste certificate Form Start -->
+      <mat-tab label="Caste Certificate">
+        <mat-card-content>
+    
+          <div class="row">
+            <div class="col-lg-12 text-right b-b-1 p-b-10 m-b-20" *ngIf="!customersForm.value.casteCertificateUrl">
+              <span class="error-text">No record available please generate the link.</span>
+            </div>
+              <div class="col-lg-12 d-flex flex-column align-items-center">
+                <div class="image-container">
+                  <img class="aadhar-img" [src]="getDocumentUrl('casteCertificateUrl_file' , 'casteCertificateUrl_show_URL' , 'casteCertificateUrl')" />
+                  <div class="upload-icon" (click)="casteCertificateCardPic.click()">
+                    <i-tabler name="upload" class="icon-20"></i-tabler>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center m-b-16 m-t-16">
+                  <img class="mat-card-avatar" [src]="getDocumentUrl('casteCertificateUrl_file' , 'casteCertificateUrl_show_URL' , 'casteCertificateUrl')" class="rounded-circle" width="50" />
+                  <button mat-flat-button color="primary" class="m-l-16 input-file-button">
+                    <input type="file" (change)="displaySelectedFile($event, 'casteCertificateUrl_file', 'casteCertificateUrl_show_URL')" #casteCertificateCardPic />
+                  </button>
+                </div>
+              </div>
+          </div>
+    
+          <div class="m-t-12 text-right">
+            <button mat-flat-button color="primary">Generate Link</button>
+            <button mat-raised-button color="accent" class="m-l-8"  (click)="uploaddocuments('casteCertificateUrl','casteCertificateUrl_file')">Upload</button>
+            <button mat-flat-button color="warn" class="m-l-8" (click)="cancel('casteCertificateCard')">Cancel</button>
+          </div>
+        </mat-card-content>
+      </mat-tab>
+      <!-- caste certificate Form End -->
+      
     </form>
   </mat-tab-group>
 </mat-card>
